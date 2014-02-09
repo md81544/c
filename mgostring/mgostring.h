@@ -39,15 +39,15 @@ struct MgoString *mgostring_construct(const char *starter, unsigned long extra_s
 bool mgostring_add(struct MgoString *str, const char *new){
     unsigned long new_len = strlen(str->data) + strlen(new);
     if (new_len > str->length) {
-        #ifdef DEBUG
-            printf("*** realloc, str->length is %lu ***\n", str->length);
-        #endif
         char *new_data = realloc(str->data, new_len + 1);
         if (new_data == NULL) {
             return false;
         }
         str->data = new_data;
         str->length = new_len;
+        #ifdef DEBUG
+            printf("*** realloc, str->length is now %lu ***\n", str->length);
+        #endif
     }
     strcat(str->data, new);
     return true;
@@ -89,9 +89,8 @@ void mgostring_trim(struct MgoString *str){
 
 int mgostring_replace(struct MgoString *str, const char *from, const char *to) {
     // Returns the number of replacements made
-    // take a copy of the entire string;
     //
-    // early out if strstr returns NULL
+    // early out if strstr returns NULL:
     if (strstr(str->data, from) == NULL) return 0;
     char *copy = strdup(str->data);
     if (copy == NULL) return 0;
