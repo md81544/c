@@ -1,9 +1,6 @@
 /* Testing */
+
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <ctype.h>
 #include "mgostring.h"
 
 
@@ -15,6 +12,8 @@ int main(int argc, char *argv[])
     mgostring_add(s, ", ");
     mgostring_add(s, "the cat sat on the mat. All your base are belong to us.         ");
     mgostring_trim(s);
+    printf("\"%s\"\n", mgostring_c_str(s));
+    mgostring_replace(s, "e", "(THE LETTER \"E\" WAS HERE)");
     printf("\"%s\"\n", mgostring_c_str(s));
     mgostring_destruct(s);
 }
