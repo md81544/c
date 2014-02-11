@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "mgostring.h"
 
-
 int main(int argc, char *argv[])
 {
     struct MgoString *s;
